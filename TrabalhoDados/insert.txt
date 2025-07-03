@@ -1,0 +1,25 @@
+INSERT INTO `amigosderua`.`cliente` (`CPFCliente`, `Nome`, `Idade`, `Endereco_Rua`, `Endereco_Bairro`, `Endereco_Cidade`, `Endereco_Cep`, `Email`) VALUES
+('111.111.111-11', 'Ana Silva', 30, 'Rua das Flores, 100', 'Jardim Botânico', 'Rio de Janeiro', '22460-000', 'ana.silva@email.com'),
+('222.222.222-22', 'Bruno Costa', 25, 'Avenida Principal, 500', 'Centro', 'São Paulo', '01000-000', 'bruno.costa@email.com'),
+('333.333.333-33', 'Carla Mendes', 40, 'Travessa da Paz, 15', 'Vila Nova', 'Belo Horizonte', '30100-000', 'carla.mendes@email.com'),
+('444.444.444-44', 'Daniel Oliveira', 22, 'Rua do Sol, 20', 'Praia Grande', 'Salvador', '40000-000', 'daniel.o@email.com'),
+('555.555.555-55', 'Eduarda Pereira', 35, 'Alameda dos Anjos, 30', 'Céu Azul', 'Porto Alegre', '90000-000', 'eduarda.p@email.com'),
+('666.666.666-66', 'Felipe Santos', 28, 'Rua da Lua, 45', 'Estrela Cadente', 'Curitiba', '80000-000', 'felipe.s@email.com'),
+('777.777.777-77', 'Gabriela Lima', 50, 'Avenida das Árvores, 70', 'Floresta', 'Recife', '50000-000', 'gabriela.l@email.com'),
+('888.888.888-88', 'Hugo Rocha', 33, 'Rua do Mar, 88', 'Oceano', 'Fortaleza', '60000-000', 'hugo.r@email.com'),
+('999.999.999-99', 'Isabela Almeida', 29, 'Praça da Liberdade, 5', 'Centro Histórico', 'Brasília', '70000-000', 'isabela.a@email.com'),
+('101.101.101-01', 'João Victor', 45, 'Rua Nova, 123', 'Bairro Velho', 'Manaus', '69000-000', 'joao.v@email.com');
+
+-- Código para inserir telefones para alguns dos novos clientes na tabela `cliente_telefone`
+INSERT INTO `amigosderua`.`cliente_telefone` (`CPFCliente`, `Telefone`) VALUES
+('111.111.111-11', '21987654321'),
+('111.111.111-11', '2123456789'),
+('222.222.222-22', '11998765432'),
+('333.333.333-33', '31987654321'),
+('444.444.444-44', '71987654321'),
+('555.555.555-55', '51987654321'),
+('666.666.666-66', '41987654321'),
+('777.777.777-77', '81987654321'),
+('888.888.888-88', '85987654321'),
+('999.999.999-99', '61987654321'),
+('101.101.101-01', '92987654321');
