@@ -1,0 +1,90 @@
+DROP TABLE IF EXISTS Animal_ONG;
+DROP TABLE IF EXISTS Adocao;
+DROP TABLE IF EXISTS Doacao;
+DROP TABLE IF EXISTS Cliente_Telefone;
+DROP TABLE IF EXISTS ONGS_Telefone;
+DROP TABLE IF EXISTS Animal;
+DROP TABLE IF EXISTS Cliente;
+DROP TABLE IF EXISTS ONGS;
+
+CREATE TABLE IF NOT EXISTS Cliente (
+    CPFCliente VARCHAR(14) PRIMARY KEY,
+    Nome VARCHAR(255) NOT NULL,
+    Idade INT CHECK (Idade >= 0),
+    Endereco_Rua VARCHAR(255),
+    Endereco_Bairro VARCHAR(255),
+    Endereco_Cidade VARCHAR(255),
+    Endereco_Cep VARCHAR(10)
+);
+
+CREATE TABLE IF NOT EXISTS Cliente_Telefone (
+    CPFCliente VARCHAR(14),
+    Telefone VARCHAR(20),
+    PRIMARY KEY (CPFCliente, Telefone),
+    FOREIGN KEY (CPFCliente) REFERENCES Cliente(CPFCliente)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Animal (
+    IDAnimal INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(255) NOT NULL,
+    Idade INT CHECK (Idade >= 0),
+    Tipo VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS ONGS (
+    IDongs INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(255) NOT NULL,
+    Endereco_Rua VARCHAR(255),
+    Endereco_Bairro VARCHAR(255),
+    Endereco_Cidade VARCHAR(255),
+    Endereco_Cep VARCHAR(10)
+);
+
+CREATE TABLE IF NOT EXISTS ONGS_Telefone (
+    IDongs INT,
+    Telefone VARCHAR(20),
+    PRIMARY KEY (IDongs, Telefone),
+    FOREIGN KEY (IDongs) REFERENCES ONGS(IDongs)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Adocao (
+    IDAdocao INT PRIMARY KEY AUTO_INCREMENT,
+    Data DATE NOT NULL,
+    TipoAnimal VARCHAR(100),
+    CPFCliente VARCHAR(14) NOT NULL,
+    IDAnimal INT NOT NULL UNIQUE,
+    FOREIGN KEY (CPFCliente) REFERENCES Cliente(CPFCliente)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (IDAnimal) REFERENCES Animal(IDAnimal)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- Tabela Doacao sem o valor padrão automático para DataDoacao (para evitar o erro 1064)
+CREATE TABLE IF NOT EXISTS Doacao (
+    IDDoacao INT PRIMARY KEY AUTO_INCREMENT,
+    TipoDoacao VARCHAR(100) NOT NULL,
+    ValorDaDoacao DECIMAL(10, 2),
+    DataDoacao DATE, -- Removido DEFAULT CURDATE()
+    CPFCliente VARCHAR(14),
+    FOREIGN KEY (CPFCliente) REFERENCES Cliente(CPFCliente)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Animal_ONG (
+    IDAnimal INT,
+    IDongs INT,
+    PRIMARY KEY (IDAnimal, IDongs),
+    FOREIGN KEY (IDAnimal) REFERENCES Animal(IDAnimal)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (IDongs) REFERENCES ONGS(IDongs)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
